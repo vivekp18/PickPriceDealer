@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.efunhub.starkio.pickpricedealer">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.LoginActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".Activity.WelcomeActivity" />
+        <activity android:name=".Activity.RegistrationActivity" />
+        <activity android:name=".Activity.AddProductActivity" />
+        <activity android:name=".Activity.ProfileActivity" />
+        <activity android:name=".Activity.AccountSettingActivity" />
+        <activity android:name=".Activity.ProductListActivity" />
+        <activity android:name=".Activity.ProductDetailsActivity" />
+        <activity android:name=".Activity.ProductSpecificationActivity"></activity>
+        <activity android:name=".Activity.TermsAndPrivacyActivity"></activity>
+        <activity android:name=".Activity.OffersClaimedActivity"></activity>
+    </application>
+
+</manifest>

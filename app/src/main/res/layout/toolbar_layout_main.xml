@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardElevation="6dp">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        card_view:contentInsetEnd="0dp"
+        card_view:contentInsetLeft="0dp"
+        card_view:contentInsetRight="0dp"
+        card_view:contentInsetStart="0dp"
+        card_view:contentInsetStartWithNavigation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textAlignment="center"
+                android:layout_centerVertical="true"
+                android:id="@+id/tvToolbarMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginStart="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+
+            <Button
+                android:id="@+id/btnOffersClamied"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Offers Claimed"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/toolbar_button_color"/>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+</android.support.v7.widget.CardView>

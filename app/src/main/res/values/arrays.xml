@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="country_list">
+        <item>Select Country</item>
+        <item>india</item>
+        <item>China</item>
+        <item>Australia</item>
+    </string-array>
+
+    <string-array name="state_list">
+        <item>Select State</item>
+        <item>Maharashtra</item>
+        <item>Rajasthan</item>
+        <item>Gujrat</item>
+    </string-array>
+
+    <string-array name="city_list">
+        <item>select City</item>
+        <item>Pune</item>
+        <item>Mumbai</item>
+        <item>Nasik</item>
+    </string-array>
+
+</resources>

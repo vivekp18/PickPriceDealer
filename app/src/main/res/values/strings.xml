@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">PickPriceDealer</string>
+    <string name="contact_no">Contact No</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="btn_textlogin">Login</string>
+    <string name="create_a_new_account">Create A New Account</string>
+    <string name="btn_textRegister">Register</string>
+    <string name="login_to_your_account">Login To Your Account</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="pincode">Pincode</string>
+    <string name="address">Address</string>
+    <string name="area">Area</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="register">Register</string>
+    <string name="location_details">Location Details</string>
+    <string name="account_setting">Account Setting</string>
+    <string name="my_account">Account</string>
+    <string name="add_product">Add Product</string>
+    <string name="my_profile">My Profile</string>
+    <string name="product_description">Product Description</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_name">Product Name</string>
+    <string name="save">Save</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">Logout</string>
+    <string name="base_url">https://efunhub.com/pickprice/webapi/</string>
+
+    <string name="offers">tv_offers</string>
+    <string name="highlights">tv_highlights</string>
+
+    <string name="currency">\u20B9</string>
+</resources>

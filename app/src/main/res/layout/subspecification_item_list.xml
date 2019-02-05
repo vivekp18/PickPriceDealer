@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView
+        android:drawableLeft="@drawable/ic_bullets"
+        android:id="@+id/tv_SubSpecificationKey"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:text="Sub Specification "
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/offers_highlights_specification"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tv_SubSpecificationValue"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:text="Sub Specification "
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/offers_highlights_specification"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/ic_action_delete" />
+
+    </LinearLayout>
+
+</RelativeLayout>

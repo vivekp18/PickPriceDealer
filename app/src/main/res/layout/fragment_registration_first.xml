@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/personal_details"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationName"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/full_name"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationEmail"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/e_mail"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationContact"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/contact_no"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationPassword"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnRegistrationNext"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_background"
+        android:text="Next"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

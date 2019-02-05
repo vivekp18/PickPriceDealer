@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_layout" />
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/CustomTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:hintTextAppearance="@style/ProfileTextAppearance"
+            app:passwordToggleDrawable="@drawable/show_password_selector"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimaryDark">
+
+            <EditText
+                android:id="@+id/edtOldPassword"
+                style="@style/ProfileTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_light_line"
+                android:fontFamily="@font/antic"
+                android:hint="@string/old_password"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/primary_dark_cursor" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/CustomTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/ProfileTextAppearance"
+            app:passwordToggleDrawable="@drawable/show_password_selector"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/colorPrimaryDark">
+
+            <EditText
+                android:id="@+id/edtNewPassword"
+                style="@style/ProfileTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_light_line"
+                android:fontFamily="@font/antic"
+                android:hint="@string/new_password"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="false"
+                android:textColor="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/primary_dark_cursor" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/antic"
+        android:text="@string/change_password"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+</RelativeLayout>

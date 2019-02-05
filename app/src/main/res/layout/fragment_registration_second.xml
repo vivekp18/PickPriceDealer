@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/location_details"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationSopNAme"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="Shop name"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spnCountry"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_light_line"
+        android:entries="@array/country_list" />
+
+    <Spinner
+        android:id="@+id/spnState"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_light_line"
+        android:entries="@array/state_list" />
+
+    <Spinner
+        android:id="@+id/spnCity"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_light_line"
+        android:entries="@array/city_list" />
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationArea"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/area"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationAddress"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/address"
+            android:inputType="textPostalAddress"
+            android:paddingStart="20dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationPinCode"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="@string/pincode"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingStart="20dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/check_box_and_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tvPrivacyAndTermsPolicies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorLink="#e20f78ce"
+            android:textColor="@color/colorBlack"
+            android:text="By clicking on 'Register', you confirm
+that you accept the Terms of Use and Privacy Policy."
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_background"
+        android:text="@string/register"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
