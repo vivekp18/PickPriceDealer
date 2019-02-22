@@ -59,7 +59,7 @@ public class RegistrationSecondFragment extends Fragment implements View.OnClick
     private View view;
     private Spinner spinnerCountry, spinnerState, spinnerCity;
     private Button btnRegister;
-    private EditText edt_area,edt_address,edt_pinCode,edt_shopName;
+    private EditText edt_area,edt_address,edt_pinCode,edt_shopName,edt_shopActNo,edt_shopGSTNo;
     private CheckBox checkBoxTermsAndConditions;
     private TextView tvTermsAndPrivacy;
     private TextView tvPrivacyPolicy;
@@ -198,6 +198,9 @@ public class RegistrationSecondFragment extends Fragment implements View.OnClick
         edt_pinCode = view.findViewById(R.id.edtRegistrationPinCode);
         edt_shopName = view.findViewById(R.id.edtRegistrationSopNAme);
 
+        edt_shopActNo = view.findViewById(R.id.edtRegistrationShopActNumber);
+        edt_shopGSTNo = view.findViewById(R.id.edtRegistrationGstNo);
+
         tvTermsAndPrivacy = view.findViewById(R.id.tvPrivacyAndTermsPolicies);
 
 
@@ -213,6 +216,14 @@ public class RegistrationSecondFragment extends Fragment implements View.OnClick
          if(edt_shopName.getText().toString().equalsIgnoreCase("") ||
                 TextUtils.isEmpty(edt_shopName.getText().toString())){
             edt_shopName.setError("Please enter  shop name");
+            return false;
+        }else if(edt_shopActNo.getText().toString().equalsIgnoreCase("") ||
+                TextUtils.isEmpty(edt_shopName.getText().toString())){
+             edt_shopActNo.setError("Please enter  shop act number");
+            return false;
+        }else if(edt_shopGSTNo.getText().toString().equalsIgnoreCase("") ||
+                TextUtils.isEmpty(edt_shopName.getText().toString())){
+             edt_shopGSTNo.setError("Please enter  shop GST number");
             return false;
         }
         else if (country.equals("Select Country")) {
@@ -262,6 +273,8 @@ public class RegistrationSecondFragment extends Fragment implements View.OnClick
         params.put("address",edt_address.getText().toString());
         params.put("pincode",edt_pinCode.getText().toString());
         params.put("shop_name",edt_shopName.getText().toString());
+        params.put("shop_act_no",edt_shopActNo.getText().toString());
+        params.put("gst_no",edt_shopGSTNo.getText().toString());
 
         mVollyService.postDataVolleyParameters(DEALER_REGISTRATION,
                 this.getResources().getString(R.string.base_url) + DealerRegistration,params);
@@ -587,8 +600,12 @@ public class RegistrationSecondFragment extends Fragment implements View.OnClick
 
                 if(connectivityStatus){
                     if(checkValid()){
-                        progressDialog = ProgressDialog.show(getActivity(), "Pick Price", "Please wait while updating password",
-                                false, false);
+                        progressDialog = new ProgressDialog(getActivity(),R.style.AlertDialogStyle);
+                        progressDialog.setTitle("Pick Price");
+                        progressDialog.setMessage("Please wait.");
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
                         dealerRegistration();
                     }
                 }

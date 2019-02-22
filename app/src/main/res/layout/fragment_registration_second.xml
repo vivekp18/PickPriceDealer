@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,6 +19,29 @@
         android:textStyle="bold" />
 
     <android.support.design.widget.TextInputLayout
+    style="@style/CustomTextAppearance"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:hintTextAppearance="@style/ProfileTextAppearance">
+
+    <EditText
+        android:textCursorDrawable="@drawable/primary_dark_cursor"
+        android:id="@+id/edtRegistrationSopNAme"
+        style="@style/ProfileTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edit_text_light_line"
+        android:fontFamily="@font/antic"
+        android:hint="Shop name"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:selectAllOnFocus="false"
+        android:textColor="@color/textViewColor" />
+
+</android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         style="@style/CustomTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,14 +49,38 @@
 
         <EditText
             android:textCursorDrawable="@drawable/primary_dark_cursor"
-            android:id="@+id/edtRegistrationSopNAme"
+            android:id="@+id/edtRegistrationShopActNumber"
             style="@style/ProfileTextAppearance"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="10dp"
             android:background="@drawable/edit_text_light_line"
             android:fontFamily="@font/antic"
-            android:hint="Shop name"
+            android:hint="Shop Act number"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:selectAllOnFocus="false"
+            android:textColor="@color/textViewColor" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        style="@style/CustomTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintTextAppearance="@style/ProfileTextAppearance">
+
+        <EditText
+            android:textCursorDrawable="@drawable/primary_dark_cursor"
+            android:id="@+id/edtRegistrationGstNo"
+            style="@style/ProfileTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text_light_line"
+            android:fontFamily="@font/antic"
+            android:hint="GST number"
             android:inputType="text"
             android:paddingStart="20dp"
             android:selectAllOnFocus="false"

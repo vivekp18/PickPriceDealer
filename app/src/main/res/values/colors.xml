@@ -17,4 +17,8 @@
     <color name="lightGrayBackground">#F2F2F2</color>
 
     <color name="offers_highlights_specification">#696969</color>
+
+    <color name="colorGreen">#c0320e</color>
+    <color name="colorRed">#009f1d</color>
+
 </resources>

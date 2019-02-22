@@ -33,7 +33,8 @@
     <string name="old_password">Old Password</string>
     <string name="change_password">Change Password</string>
     <string name="logout">Logout</string>
-    <string name="base_url">https://efunhub.com/pickprice/webapi/</string>
+	
+    <string name="base_url">http://pickprice.in/webapi/</string>
 
     <string name="offers">tv_offers</string>
     <string name="highlights">tv_highlights</string>

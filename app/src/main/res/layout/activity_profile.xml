@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:id="@+id/profileLayout"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_layout" />
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout" />
 
     <RelativeLayout
+        android:layout_below="@+id/toolbar"
         android:id="@+id/rlMainProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -132,6 +136,51 @@
                     android:background="@drawable/edit_text_light_line"
                     android:fontFamily="@font/antic"
                     android:hint="Shop Name"
+                    android:inputType="text"
+                    android:selectAllOnFocus="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textCursorDrawable="@drawable/primary_dark_cursor" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/ProfileTextAppearance">
+
+                <EditText
+                    android:id="@+id/edtProfileShopActNo"
+                    style="@style/ProfileTextAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_text_light_line"
+                    android:fontFamily="@font/antic"
+                    android:hint="Shop Act Number"
+                    android:inputType="text"
+                    android:selectAllOnFocus="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textCursorDrawable="@drawable/primary_dark_cursor" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                style="@style/CustomTextAppearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/ProfileTextAppearance">
+
+                <EditText
+                    android:id="@+id/edtProfileShopGstNo"
+                    style="@style/ProfileTextAppearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edit_text_light_line"
+                    android:fontFamily="@font/antic"
+                    android:hint="GST Number"
                     android:inputType="text"
                     android:selectAllOnFocus="false"
                     android:textColor="@color/colorPrimaryDark"
@@ -292,7 +341,43 @@
         </LinearLayout>
 
         </ScrollView>
-
-
     </RelativeLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llNoInternetHomeFrag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a8000000"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_not_internet" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="Connection Not Available...!!!"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvRetryHomeFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="RETRY"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,14 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.TermsAndPrivacyActivity"
     android:orientation="vertical"
+    android:id="@+id/termsandConditionLayout"
     android:gravity="top|fill_vertical">
 
-    <include layout="@layout/toolbar_layout_main"></include>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_layout"></include>
 
     <ScrollView
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -54,4 +60,4 @@
         </RelativeLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

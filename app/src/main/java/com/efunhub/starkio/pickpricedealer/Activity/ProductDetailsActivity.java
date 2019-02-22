@@ -1,11 +1,17 @@
 package com.efunhub.starkio.pickpricedealer.Activity;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -29,7 +36,6 @@ import com.efunhub.starkio.pickpricedealer.Adapter.HighLightsAdapter;
 import com.efunhub.starkio.pickpricedealer.Adapter.OffersListAdapter;
 import com.efunhub.starkio.pickpricedealer.BroadCastReciver.CheckConnectivity;
 import com.efunhub.starkio.pickpricedealer.Interface.IResult;
-import com.efunhub.starkio.pickpricedealer.Interface.NoInternetListener;
 import com.efunhub.starkio.pickpricedealer.Modal.Highlights;
 import com.efunhub.starkio.pickpricedealer.Modal.Offers;
 import com.efunhub.starkio.pickpricedealer.R;
@@ -107,6 +113,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     private TextView tvAddOffers,tvAddHighlights;
     private EditText edtAddOffers,edtAddHighLights;
     private Button btnAddOffer,btnAddHighLights;
+
+    //produdustDetailsLayout
+
+    //private CheckConnectivity checkConnectivity;
+    //private boolean connectivityStatus = true;
+    private RelativeLayout produdustDetailsLayout;
+    private LinearLayout noInternetConn;
+    private TextView tvRetry;
+
+    private Snackbar snackbar;
+    public static int TYPE_WIFI = 1;
+    public static int TYPE_MOBILE = 0;
+    public static int TYPE_NOT_CONNECTED = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -689,6 +708,10 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
         tv_NoHighLights = findViewById(R.id.tv_HighLightsNotAvailable);
         tv_NoOffers = findViewById(R.id.tv_offersNotAvailable);
 
+        produdustDetailsLayout=(RelativeLayout) findViewById(R.id.produdustDetailsLayout);
+        noInternetConn=(LinearLayout) findViewById(R.id.llNoInternetHomeFrag);
+        tvRetry=(TextView) findViewById(R.id.tvRetryHomeFrag);
+
         if(getIntent().hasExtra("ProductId")){
             productid = getIntent().getStringExtra("ProductId");
         }else{
@@ -785,6 +808,119 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @Override
     public void onResume() {
         super.onResume();
+        registerInternetCheckReceiver();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.unregisterReceiver(broadcastReceiver);
+
+    }
+
+    //to check internet connectivity
+    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String status = getConnectivityStatusString(context);
+            setSnackbarMessage(status,false);
+        }
+    };
+
+
+    /**
+     *  Method to register runtime broadcast receiver to show snackbar alert for internet connection..
+     */
+    private void registerInternetCheckReceiver() {
+        IntentFilter internetFilter = new IntentFilter();
+        internetFilter.addAction("android.net.wifi.STATE_CHANGE");
+        internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        this.registerReceiver(broadcastReceiver, internetFilter);
+    }
+
+    public static String getConnectivityStatusString(Context context) {
+
+        int conn = getConnectivityStatus(context);
+
+        String status = null;
+        if (conn == TYPE_WIFI) {
+            status = "Wifi enabled";
+
+        } else if (conn == TYPE_MOBILE) {
+            status = "Mobile data enabled";
+        }
+
+        else if (conn == TYPE_NOT_CONNECTED) {
+            status = "Not connected to Internet";
+        }
+        return status;
+    }
+
+    public static int getConnectivityStatus(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == TYPE_WIFI)
+                return TYPE_WIFI;
+            if(activeNetwork.getType() == TYPE_MOBILE)
+                return TYPE_MOBILE;
+        }
+        return TYPE_NOT_CONNECTED;
+    }
+    private void setSnackbarMessage(String status,boolean showBar) {
+
+        String internetStatus="";
+
+        if(status.equalsIgnoreCase("Wifi enabled")){
+            internetStatus="Internet Connected";
+        }
+        if(status.equalsIgnoreCase("Mobile data enabled")){
+            internetStatus="Internet Connected";
+        }
+        if(status.equalsIgnoreCase("Not connected to Internet")){
+            internetStatus="Please check internet connection";
+        }
+        snackbar = Snackbar
+                .make(produdustDetailsLayout, internetStatus, Snackbar.LENGTH_LONG)
+                .setAction("X", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        snackbar.dismiss();
+                    }
+                });
+        // Changing message text color
+        snackbar.setActionTextColor(Color.WHITE);
+        // Changing action button text color
+        View sbView = snackbar.getView();
+
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        if(internetStatus.equalsIgnoreCase("Please check internet connection")){
+            if(connectivityStatus){
+                sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGreen));
+                snackbar.show();
+                connectivityStatus=false;
+                noInternetConn.setVisibility(View.VISIBLE);
+            }
+        }else{
+            if(!connectivityStatus){
+                sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+                connectivityStatus=true;
+                snackbar.show();
+                noInternetConn.setVisibility(View.GONE);
+
+            }
+        }
+    }
+
+    /*@Override
+    public void onResume() {
+        super.onResume();
 
         productDetailsActivity = this;
 
@@ -806,7 +942,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements View.On
     @Override
     public void onPause() {
         super.onPause();
-        /*UnRegister receiver for connectivity*/
+        *//*UnRegister receiver for connectivity*//*
         this.unregisterReceiver(checkConnectivity);
-    }
+    }*/
 }

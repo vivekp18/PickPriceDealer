@@ -2,6 +2,8 @@ package com.efunhub.starkio.pickpricedealer.Activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,9 +13,11 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.support.media.ExifInterface;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -32,6 +36,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,7 +48,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.efunhub.starkio.pickpricedealer.BroadCastReciver.CheckConnectivity;
 import com.efunhub.starkio.pickpricedealer.Interface.IResult;
-import com.efunhub.starkio.pickpricedealer.Interface.NoInternetListener;
 import com.efunhub.starkio.pickpricedealer.R;
 import com.efunhub.starkio.pickpricedealer.Utility.CircularImageView;
 import com.efunhub.starkio.pickpricedealer.Utility.ImageFilePath;
@@ -92,6 +97,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText edt_email;
     private EditText edt_phone_number;
     private EditText edt_shop_name;
+    private EditText edt_shop_act_no;
+    private EditText edt_shop_gst_no;
     private EditText edt_country;
     private EditText edt_state;
     private EditText edt_city;
@@ -124,6 +131,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private String profileImageTag =null;
     private AlertDialog alertDialog;
     String picturePath = null;
+
+
+
+    //private CheckConnectivity checkConnectivity;
+    //private boolean connectivityStatus = true;
+    private RelativeLayout profileLayout;
+    private LinearLayout noInternetConn;
+    private TextView tvRetry;
+
+    private Snackbar snackbar;
+    public static int TYPE_WIFI = 1;
+    public static int TYPE_MOBILE = 0;
+    public static int TYPE_NOT_CONNECTED = 2;
 
 
     @Override
@@ -230,6 +250,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         edt_email = findViewById(R.id.edtProfileEmail);
         edt_phone_number = findViewById(R.id.edtProfileContact);
         edt_shop_name = findViewById(R.id.edtProfileShopName);
+        edt_shop_act_no = findViewById(R.id.edtProfileShopActNo);
+        edt_shop_gst_no = findViewById(R.id.edtProfileShopGstNo);
         edt_country = findViewById(R.id.edtProfileCountry);
         edt_state = findViewById(R.id.edtProfileState);
         edt_city = findViewById(R.id.edtProfileCity);
@@ -246,6 +268,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         cityList = new ArrayList<>();
 
 
+        profileLayout=(RelativeLayout) findViewById(R.id.profileLayout);
+        noInternetConn=(LinearLayout) findViewById(R.id.llNoInternetHomeFrag);
+        tvRetry=(TextView) findViewById(R.id.tvRetryHomeFrag);
 
         sessionManager = new SessionManager(this);
 
@@ -449,6 +474,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         params.put("address",edt_address.getText().toString());
         params.put("pincode",edt_pincode.getText().toString());
         params.put("shop_name",edt_shop_name.getText().toString());
+        params.put("shop_act_no",edt_shop_act_no.getText().toString());
+        params.put("gst_no",edt_shop_gst_no.getText().toString());
 
         mVollyService.postDataVolleyParameters(UPADTE_PROFILE,
                 this.getResources().getString(R.string.base_url) + UpdateProfileURL,params);
@@ -518,25 +545,38 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                                         edt_name.setText(json_results.getString("name"));
                                     }else{
-                                        edt_name.setText("Not available");
+                                        edt_name.setText("");
                                     }
                                     if (json_results.has("email")) {
 
                                         edt_email.setText(json_results.getString("email"));
 
                                     }else{
-                                        edt_email.setText("Not available");
+                                        edt_email.setText("");
                                     }
                                     if (json_results.has("contact")) {
                                         edt_phone_number.setText(json_results.getString("contact"));
                                     }else{
-                                        edt_phone_number.setText("Not available");
+                                        edt_phone_number.setText("");
                                     }
 
                                     if (json_results.has("shop_name")) {
                                         edt_shop_name.setText(json_results.getString("shop_name"));
                                     }else{
-                                        edt_shop_name.setText("Not available");
+                                        edt_shop_name.setText("");
+                                    }
+
+                                    if (json_results.has("shop_act_no")) {
+                                        edt_shop_act_no.setText(json_results.getString("shop_act_no"));
+                                    }else{
+                                        edt_shop_act_no.setText("");
+                                    }
+
+
+                                    if (json_results.has("gst_no")) {
+                                        edt_shop_gst_no.setText(json_results.getString("gst_no"));
+                                    }else{
+                                        edt_shop_gst_no.setText("");
                                     }
 
                                     if (json_results.has("country")) {
@@ -560,19 +600,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                     if (json_results.has("area")) {
                                         edt_area.setText(json_results.getString("area"));
                                     }else{
-                                        edt_area.setText("Not available");
+                                        edt_area.setText("");
                                     }
 
                                     if (json_results.has("address")) {
                                         edt_address.setText(json_results.getString("address"));
                                     }else{
-                                        edt_address.setText("Not available");
+                                        edt_address.setText("");
                                     }
 
                                     if (json_results.has("pincode")) {
                                         edt_pincode.setText(json_results.getString("pincode"));
                                     }else{
-                                        edt_pincode.setText("Not available");
+                                        edt_pincode.setText("");
                                     }
 
 
@@ -1078,32 +1118,117 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
-
-
     @Override
     public void onResume() {
         super.onResume();
+        registerInternetCheckReceiver();
 
-        //Check connectivity
-        checkConnectivity = new CheckConnectivity(ProfileActivity.this, new NoInternetListener() {
-            @Override
-            public void availConnection(boolean connection) {
-                if (connection) {
-                    connectivityStatus = true;
-                } else {
-                    connectivityStatus = false;
-                }
-            }
-        });
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        ProfileActivity.this.registerReceiver(checkConnectivity, intentFilter);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        /*UnRegister receiver for connectivity*/
-        this.unregisterReceiver(checkConnectivity);
+        this.unregisterReceiver(broadcastReceiver);
+
+    }
+
+    //to check internet connectivity
+    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String status = getConnectivityStatusString(context);
+            setSnackbarMessage(status,false);
+        }
+    };
+
+
+    /**
+     *  Method to register runtime broadcast receiver to show snackbar alert for internet connection..
+     */
+    private void registerInternetCheckReceiver() {
+        IntentFilter internetFilter = new IntentFilter();
+        internetFilter.addAction("android.net.wifi.STATE_CHANGE");
+        internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        this.registerReceiver(broadcastReceiver, internetFilter);
+    }
+
+    public static String getConnectivityStatusString(Context context) {
+
+        int conn = getConnectivityStatus(context);
+
+        String status = null;
+        if (conn == TYPE_WIFI) {
+            status = "Wifi enabled";
+
+        } else if (conn == TYPE_MOBILE) {
+            status = "Mobile data enabled";
+        }
+
+        else if (conn == TYPE_NOT_CONNECTED) {
+            status = "Not connected to Internet";
+        }
+        return status;
+    }
+
+    public static int getConnectivityStatus(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        if (null != activeNetwork) {
+            if(activeNetwork.getType() == TYPE_WIFI)
+                return TYPE_WIFI;
+            if(activeNetwork.getType() == TYPE_MOBILE)
+                return TYPE_MOBILE;
+        }
+        return TYPE_NOT_CONNECTED;
+    }
+    private void setSnackbarMessage(String status,boolean showBar) {
+
+        String internetStatus="";
+
+        if(status.equalsIgnoreCase("Wifi enabled")){
+            internetStatus="Internet Connected";
+        }
+        if(status.equalsIgnoreCase("Mobile data enabled")){
+            internetStatus="Internet Connected";
+        }
+        if(status.equalsIgnoreCase("Not connected to Internet")){
+            internetStatus="Please check internet connection";
+        }
+        snackbar = Snackbar
+                .make(profileLayout, internetStatus, Snackbar.LENGTH_LONG)
+                .setAction("X", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        snackbar.dismiss();
+                    }
+                });
+        // Changing message text color
+        snackbar.setActionTextColor(Color.WHITE);
+        // Changing action button text color
+        View sbView = snackbar.getView();
+
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        if(internetStatus.equalsIgnoreCase("Please check internet connection")){
+            if(connectivityStatus){
+                sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGreen));
+                snackbar.show();
+                connectivityStatus=false;
+                noInternetConn.setVisibility(View.VISIBLE);
+            }
+        }else{
+            if(!connectivityStatus){
+                sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRed));
+                connectivityStatus=true;
+                snackbar.show();
+                noInternetConn.setVisibility(View.GONE);
+                dealerLoadProfile();
+            }
+        }
     }
 
     @Override
